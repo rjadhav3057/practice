@@ -1,0 +1,19 @@
+[
+    {
+        "deptid":1,
+        "deptname":"Hr",
+        "empid":1
+    },
+    {
+        
+        "deptid":2,
+        "deptname":"Accounts",
+        "empid":2
+
+    },
+    {
+        "deptid":3,
+        "deptname":"Development",
+        "empid":3
+    }
+]
