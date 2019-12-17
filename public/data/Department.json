@@ -1,19 +1,19 @@
 [
     {
-        "deptid":1,
-        "deptname":"Hr",
-        "empid":1
+        "dept_id":1,
+        "dept_name":"Hr",
+        "emp_id":1
     },
     {
         
-        "deptid":2,
-        "deptname":"Accounts",
-        "empid":2
+        "dept_id":2,
+        "dept_name":"Accounts",
+        "emp_id":2
 
     },
     {
-        "deptid":3,
-        "deptname":"Development",
-        "empid":3
+        "dept_id":3,
+        "dept_name":"Development",
+        "emp_id":3
     }
 ]

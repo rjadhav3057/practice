@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Table} from 'react-bootstrap';
 
 export default class Leave extends React.Component {
     constructor(props) {
@@ -33,23 +34,30 @@ export default class Leave extends React.Component {
     renderTableData = () => {
         return (
             <div>
-                <b>Leave_Details</b>
-            <table>
-                    <tbody>
+                <div className="tours">
+                    <h1>Leave Details</h1>
+                </div>
+                <Table striped bordered hover>
+                    <thead>
                         <tr>
-                            <td>leave_id</td>
-                            <td>EMP_id</td>
+                            <th>LEAVE_ID</th>
+                            <th>LEAVE_DATE</th>
+                            <th>EMP_ID</th>
+
                         </tr>
+                    </thead>
+                    <tbody>
                         {this.state.data.map((listValue, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{listValue.leaveid}</td>
-                                    <td>{listValue.empid}</td>
+                                    <td>{listValue.leave_id}</td>
+                                    <td>{listValue.leave_date}</td>
+                                    <td>{listValue.emp_id}</td>
                                 </tr>
                             );
                         })}
                     </tbody>
-                </table>
+                </Table>
             </div>
         );
     }

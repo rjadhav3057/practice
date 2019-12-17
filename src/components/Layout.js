@@ -3,8 +3,8 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Content from './Content';
 import Footer from './Footer';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export default function Layout() {
     return (
@@ -12,7 +12,7 @@ export default function Layout() {
             <div>
             <Header />
             </div>
-            
+      
             <Row>
                 <Router>
                     <Col xs={3} className="column1">
@@ -23,7 +23,7 @@ export default function Layout() {
                     </Col>
                 </Router>
             </Row>
-        
+       
             <Footer />
         </div >
     )

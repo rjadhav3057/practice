@@ -1,20 +1,20 @@
 [
     {
-        "empid":1,
-        "empname":"rahul",
-        "salary":50000   
+        "emp_id":1,
+        "emp_name":"rahul",
+        "emp_salary":50000   
     },
 
     {
-        "empid":2,
-        "empname":"Sayali",
-        "salary":50000   
+        "emp_id":2,
+        "emp_name":"Sayali",
+        "emp_salary":50000   
     },
 
     {
-        "empid":3,
-        "empname":"Shilpa",
-        "salary":50000   
+        "emp_id":3,
+        "emp_name":"Shilpa",
+        "emp_salary":50000   
     }
 
 ]

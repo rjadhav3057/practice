@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-
+import {Table} from 'react-bootstrap';
 
 /**
  * @usage :  
@@ -26,26 +26,31 @@ export default class Employee extends React.Component {
     renderTableData = () => {
         return (
             <div>
-               <b>Employee_Details</b>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>EMP_id</td>
-                            <td>EMP_name</td>
-                            <td>EMP_salary</td>
-                        </tr>
-                        {this.state.data.map((listValue, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{listValue.empid}</td>
-                                    <td>{listValue.empname}</td>
-                                    <td>{listValue.salary}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+            <div className="tours">
+                <h1>Employee Details</h1>
             </div>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>EMP_ID</th>
+                        <th>EMP_NAME</th>
+                        <th>EMP_SALARY</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.data.map((listValue, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{listValue.emp_id}</td>
+                                <td>{listValue.emp_name}</td>
+                                <td>{listValue.emp_salary}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+        </div>
         );
     }
 
