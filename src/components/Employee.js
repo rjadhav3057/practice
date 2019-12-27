@@ -62,10 +62,10 @@ export default class Employee extends React.Component {
      * 
      */
     getData = (emp) => {
-        Axios.get('/data/Employee.json').then((res) => {
-            console.log(res);
+        Axios.get('http://localhost:3001/employee').then((res) => {
+            console.log(res.data);
             this.setState({
-                data: res.data
+                data: res.data.data
             })
         })
     }

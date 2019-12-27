@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
+import Axios from 'axios';
 
 export default class Leave extends React.Component {
     constructor(props) {
@@ -13,24 +14,14 @@ export default class Leave extends React.Component {
         this.getData();
     }
 
-    getData = (name) => {
-        fetch('/data/Leave.json')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    this.state.data = result;
-                    this.setState({
-                        data: result
-                    })
-
-                },
-                (error) => {
-
-                }
-            )
+    getData = (emp) => {
+        Axios.get('http://localhost:3001/leave').then((res) => {
+            console.log(res.data);
+            this.setState({
+                data: res.data.data
+            })
+        })
     }
-
     renderTableData = () => {
         return (
             <div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Table} from 'react-bootstrap';
+import Axios from 'axios';
 
 export default class Department extends React.Component {
 
@@ -15,23 +16,15 @@ export default class Department extends React.Component {
         this.getData();
     }
 
-    getData = (name) => {
-        fetch('/data/Department.json')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    this.state.data = result;
-                    this.setState({
-                        data: result
-                    })
-
-                },
-                (error) => {
-
-                }
-            )
+    getData = (emp) => {
+        Axios.get('http://localhost:3001/department').then((res) => {
+            console.log(res.data);
+            this.setState({
+                data: res.data.data
+            })
+        })
     }
+
 
     renderTableData = () => {
         return (

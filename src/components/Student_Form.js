@@ -2,9 +2,10 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from "react-datepicker";
-import { Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment'
+import Axios from 'axios';
 import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
 
 
@@ -60,307 +61,313 @@ export default class Student_Form extends React.Component {
         this.state = {
             smShow: false,
             lgShow: false,
-            startDate: new Date()
+            startDate: new Date(),
+            
         };
 
     }
 
-
-
-    handleChange = date => {
-        this.setState({
-            startDate: date
-        });
-    };
-
-    setSmShow = () => {
-        this.setState({
-            smShow: true
-        })
-
-    }
-
-    setSmSClose = () => {
-        this.setState({
-            smShow: false
-        })
-    }
-
-    setLgShow = () => {
-        this.setState({
-            lgShow: true
-
-        })
+    savedata = (values) => {
+        console.log(values);
     }
 
 
-    setLgClose = () => {
-        this.setState({
-            lgShow: false
+handleChange = date => {
+    this.setState({
+        startDate: date
+    });
+};
 
-        })
-    }
+setSmShow = () => {
+    this.setState({
+        smShow: true
+    })
 
+}
 
+setSmSClose = () => {
+    this.setState({
+        smShow: false
+    })
+}
 
-    studentrenderform() {
-        let self = this;
-        return (
-            <div>
-                <h1>Signup</h1>
-                <Formik
-                    initialValues={{
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                        dob: '',
-                        city: '',
-                        state: '',
-                        gender: ''
-                    }}
-                    validationSchema={SignupSchema}
-                    onSubmit={values => {
-                        // same shape as initial values
-                        console.log(values);
-                    }}
-                >
-                    {props => (
-                        <Form>
+setLgShow = () => {
+    this.setState({
+        lgShow: true
 
-                            <Row>
-                                <Col xs={1}></Col>
-                                <Col xs={2}>first-name</Col>
-
-                                <Col xs={3}>
-                                    <Field type="text" name="firstName" />
-                                    {props.errors.firstName && props.touched.firstName ? (
-                                        <div style={{ color: "red" }}>{props.errors.firstName}</div>
-                                    ) : null}
-                                </Col>
-
-                                <Col xs={1}></Col>
-                                <Col xs={1}>last-name</Col>
-
-                                <Col xs={3}>
-                                    <Field name="lastName" />
-                                    {props.errors.lastName && props.touched.lastName ? (
-                                        <div>{props.errors.lastName}</div>
-                                    ) : null}</Col>
-                            </Row>
+    })
+}
 
 
-                            <Row>
-                                <Col xs={1}></Col>
-                                <Col xs={2}>Email:</Col>
-                                <Col xs={3}>
-                                    <Field name="email" type="email" />
-                                    {props.errors.email && props.touched.email ? <div>{props.errors.email}</div> : null}
-                                </Col>
+setLgClose = () => {
+    this.setState({
+        lgShow: false
 
-                                <Col xs={1}></Col>
-                                <Col xs={1}>D.O.B:</Col>
-                                <Col xs={3}>
-                                    <DatePicker name="dob"
-                                        selected={this.state.startDate}
-                                        onChange={function (value) {
-                                            props.setFieldValue("dob", moment(value).format('DD-MM-YYYY'));
-                                            self.setState({
-                                                startDate: value//moment(value).format('DD/MM/YYYY')
-                                            })
-                                        }}
-                                    />
-                                </Col>
-                            </Row>
+    })
+}
 
-                            <Row>
-                                <Col xs={1}></Col>
-                                <Col xs={2}>City:</Col>
-                                <Col xs={3}>
 
-                                    <Field name="city" />
-                                    {props.errors.city && props.touched.city ? <div>{props.errors.city}</div> : null}
-                                </Col>
 
-                                <Col xs={1}></Col>
-                                <Col xs={1}>state</Col>
-                                <Col xs={3}>
-                                    <Field as="select" name="state">
-                                        <option value="select">Select</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Karnatak">Karnatak</option>
-                                        <option value="Gujrat">Gujrat</option>
-                                    </Field>
-                                </Col>
-                            </Row>
+studentrenderform() {
+    let self = this;
+    return (
+        <div>
+            <h1>Signup</h1>
+            <Formik
+                initialValues={{
+                    firstName: 'Rahul',
+                    lastName: 'Jadhav',
+                    email: 'rj26395@gmail.com',
+                    dob: '',
+                    city: 'Pune',
+                    state: 'Maharashtra',
+                    gender: 'Male'
+                }}
+                validationSchema={SignupSchema}
+                onSubmit={values => {
+                    {
+                         this.savedata(values)}
+                    // same shape as initial values
+                    console.log(values);
+                }}
+            >
+                {props => (
+                    <Form>
 
-                            <Row>
-                                <Col xs={1}></Col>
-                                <Col xs={2}>Gender:</Col>
-                                <Col xs={3}>
-                                    <label>
-                                        <input type="radio" value="Male" name="gender" onChange={props.handleChange} />
-                                        Male
+                        <Row>
+                            <Col xs={1}></Col>
+                            <Col xs={2}>first-name</Col>
+
+                            <Col xs={3}>
+                                <Field type="text" name="firstName" />
+                                {props.errors.firstName && props.touched.firstName ? (
+                                    <div style={{ color: "red" }}>{props.errors.firstName}</div>
+                                ) : null}
+                            </Col>
+
+                            <Col xs={1}></Col>
+                            <Col xs={1}>last-name</Col>
+
+                            <Col xs={3}>
+                                <Field name="lastName" />
+                                {props.errors.lastName && props.touched.lastName ? (
+                                    <div>{props.errors.lastName}</div>
+                                ) : null}</Col>
+                        </Row>
+
+
+                        <Row>
+                            <Col xs={1}></Col>
+                            <Col xs={2}>Email:</Col>
+                            <Col xs={3}>
+                                <Field name="email" type="email" />
+                                {props.errors.email && props.touched.email ? <div>{props.errors.email}</div> : null}
+                            </Col>
+
+                            <Col xs={1}></Col>
+                            <Col xs={1}>D.O.B:</Col>
+                            <Col xs={3}>
+                                <DatePicker name="dob"
+                                    selected={this.state.startDate}
+                                    onChange={function (value) {
+                                        props.setFieldValue("dob", moment(value).format('DD-MM-YYYY'));
+                                        self.setState({
+                                            startDate: value//moment(value).format('DD/MM/YYYY')
+                                        })
+                                    }}
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col xs={1}></Col>
+                            <Col xs={2}>City:</Col>
+                            <Col xs={3}>
+
+                                <Field name="city" />
+                                {props.errors.city && props.touched.city ? <div>{props.errors.city}</div> : null}
+                            </Col>
+
+                            <Col xs={1}></Col>
+                            <Col xs={1}>state</Col>
+                            <Col xs={3}>
+                                <Field as="select" name="state">
+                                    <option value="select">Select</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Karnatak">Karnatak</option>
+                                    <option value="Gujrat">Gujrat</option>
+                                </Field>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col xs={1}></Col>
+                            <Col xs={2}>Gender:</Col>
+                            <Col xs={3}>
+                                <label>
+                                    <input type="radio" value="Male" name="gender" onChange={props.handleChange} />
+                                    Male
                                         </label>
 
-                                    <label>
-                                        <input type="radio" value="Female" name="gender" onChange={props.handleChange} />
-                                        Female
+                                <label>
+                                    <input type="radio" value="Female" name="gender" onChange={props.handleChange} />
+                                    Female
                                   </label>
-                                </Col>
-                            </Row>
+                            </Col>
+                        </Row>
 
-                            <Row>
-                                <Col xs={1}></Col>
-                                <button type="submit">Submit</button>
-                                <Col xs={1}></Col>
-                                <Col xs={5}>
+                        <Row>
+                            <Col xs={1}></Col>
+                            <button type="submit">Submit</button>
+                            <Col xs={1}></Col>
+                            <Col xs={5}>
 
-                                    <ButtonToolbar>
+                                <ButtonToolbar>
 
 
-                                        <Col xs={3}>
-                                            <Button onClick={this.setSmShow}>Small modal</Button>
-                                        </Col>
+                                    <Col xs={3}>
+                                        <Button onClick={this.setSmShow}>Small modal</Button>
+                                    </Col>
 
-                                        <Col xs={3}>
-                                            <Button onClick={this.setLgShow}>Large modal</Button>
-                                        </Col>
+                                    <Col xs={3}>
+                                        <Button onClick={this.setLgShow}>Large modal</Button>
+                                    </Col>
 
-                                        <Modal
-                                            size="sm"
-                                            show={this.state.smShow}
-                                            onHide={this.setSmSClose}
-                                            aria-labelledby="example-modal-sizes-title-sm">
-                                            <Modal.Header closeButton>
-                                                <Modal.Title id="example-modal-sizes-title-sm">
-                                                    Small Modal
+                                    <Modal
+                                        size="sm"
+                                        show={this.state.smShow}
+                                        onHide={this.setSmSClose}
+                                        aria-labelledby="example-modal-sizes-title-sm">
+                                        <Modal.Header closeButton>
+                                            <Modal.Title id="example-modal-sizes-title-sm">
+                                                Small Modal
                                              </Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>...</Modal.Body>
-                                        </Modal>
+                                        </Modal.Header>
+                                        <Modal.Body>...</Modal.Body>
+                                    </Modal>
 
-                                        <Modal
-                                            size="lg"
-                                            show={this.state.lgShow}
-                                            onHide={this.setLgClose}
-                                            aria-labelledby="example-modal-sizes-title-lg"
-                                        >
-                                            <Modal.Header closeButton>
-                                                <Modal.Title id="example-modal-sizes-title-lg">
-
-
-                                                </Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Form>
-
-                                                    <Row>
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={2}>first-name</Col>
-
-                                                        <Col xs={3}>
-                                                            <Field type="text" name="firstName" />
-                                                            {props.errors.firstName && props.touched.firstName ? (
-                                                                <div style={{ color: "red" }}>{props.errors.firstName}</div>
-                                                            ) : null}
-                                                        </Col>
-
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={1}>last-name</Col>
-
-                                                        <Col xs={3}>
-                                                            <Field name="lastName" />
-                                                            {props.errors.lastName && props.touched.lastName ? (
-                                                                <div>{props.errors.lastName}</div>
-                                                            ) : null}</Col>
-                                                    </Row>
+                                    <Modal
+                                        size="lg"
+                                        show={this.state.lgShow}
+                                        onHide={this.setLgClose}
+                                        aria-labelledby="example-modal-sizes-title-lg"
+                                    >
+                                        <Modal.Header closeButton>
+                                            <Modal.Title id="example-modal-sizes-title-lg">
 
 
-                                                    <Row>
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={2}>Email:</Col>
-                                                        <Col xs={3}>
-                                                            <Field name="email" type="email" />
-                                                            {props.errors.email && props.touched.email ? <div>{props.errors.email}</div> : null}
-                                                        </Col>
+                                            </Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <Form>
 
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={1}>D.O.B:</Col>
-                                                        <Col xs={3}>
-                                                            <DatePicker name="dob"
-                                                                selected={this.state.startDate}
-                                                                onChange={function (value) {
-                                                                    props.setFieldValue("dob", moment(value).format('DD-MM-YYYY'));
-                                                                    self.setState({
-                                                                        startDate: value//moment(value).format('DD/MM/YYYY')
-                                                                    })
-                                                                }}
-                                                            />
-                                                        </Col>
-                                                    </Row>
+                                                <Row>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={2}>first-name</Col>
 
-                                                    <Row>
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={2}>City:</Col>
-                                                        <Col xs={3}>
+                                                    <Col xs={3}>
+                                                        <Field type="text" name="firstName" />
+                                                        {props.errors.firstName && props.touched.firstName ? (
+                                                            <div style={{ color: "red" }}>{props.errors.firstName}</div>
+                                                        ) : null}
+                                                    </Col>
 
-                                                            <Field name="city" />
-                                                            {props.errors.city && props.touched.city ? <div>{props.errors.city}</div> : null}
-                                                        </Col>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={1}>last-name</Col>
 
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={1}>state</Col>
-                                                        <Col xs={3}>
-                                                            <Field as="select" name="state">
-                                                                <option value="select">Select</option>
-                                                                <option value="Maharashtra">Maharashtra</option>
-                                                                <option value="Karnatak">Karnatak</option>
-                                                                <option value="Gujrat">Gujrat</option>
-                                                            </Field>
-                                                        </Col>
-                                                    </Row>
+                                                    <Col xs={3}>
+                                                        <Field name="lastName" />
+                                                        {props.errors.lastName && props.touched.lastName ? (
+                                                            <div>{props.errors.lastName}</div>
+                                                        ) : null}</Col>
+                                                </Row>
 
-                                                    <Row>
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={2}>Gender:</Col>
-                                                        <Col xs={3}>
-                                                            <label>
-                                                                <input type="radio" value="Male" name="gender" onChange={props.handleChange} />
-                                                                Male
+
+                                                <Row>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={2}>Email:</Col>
+                                                    <Col xs={3}>
+                                                        <Field name="email" type="email" />
+                                                        {props.errors.email && props.touched.email ? <div>{props.errors.email}</div> : null}
+                                                    </Col>
+
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={1}>D.O.B:</Col>
+                                                    <Col xs={3}>
+                                                        <DatePicker name="dob"
+                                                            selected={this.state.startDate}
+                                                            onChange={function (value) {
+                                                                props.setFieldValue("dob", moment(value).format('DD-MM-YYYY'));
+                                                                self.setState({
+                                                                    startDate: value//moment(value).format('DD/MM/YYYY')
+                                                                })
+                                                            }}
+                                                        />
+                                                    </Col>
+                                                </Row>
+
+                                                <Row>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={2}>City:</Col>
+                                                    <Col xs={3}>
+
+                                                        <Field name="city" />
+                                                        {props.errors.city && props.touched.city ? <div>{props.errors.city}</div> : null}
+                                                    </Col>
+
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={1}>state</Col>
+                                                    <Col xs={3}>
+                                                        <Field as="select" name="state">
+                                                            <option value="select">Select</option>
+                                                            <option value="Maharashtra">Maharashtra</option>
+                                                            <option value="Karnatak">Karnatak</option>
+                                                            <option value="Gujrat">Gujrat</option>
+                                                        </Field>
+                                                    </Col>
+                                                </Row>
+
+                                                <Row>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={2}>Gender:</Col>
+                                                    <Col xs={3}>
+                                                        <label>
+                                                            <input type="radio" value="Male" name="gender" onChange={props.handleChange} />
+                                                            Male
             </label>
 
-                                                            <label>
-                                                                <input type="radio" value="Female" name="gender" onChange={props.handleChange} />
-                                                                Female
+                                                        <label>
+                                                            <input type="radio" value="Female" name="gender" onChange={props.handleChange} />
+                                                            Female
       </label>
-                                                        </Col>
-                                                    </Row>
+                                                    </Col>
+                                                </Row>
 
-                                                    <Row>
-                                                        <Col xs={1}></Col>
-                                                        <button type="submit">Submit</button>
-                                                        <Col xs={1}></Col>
-                                                        <Col xs={5}></Col>
-                                                    </Row>
-                                                  </Form>
-                                            </Modal.Body>
-                                        </Modal>
-                                    </ButtonToolbar>
-                                    </Col>          
-                               
-                            </Row>
-                        </Form>
-                            )}
-                </Formik>
-            </div>
-                )
-            }
-        
-    render() {
-        return (
-            <div>
-                    {this.studentrenderform()}
-                </div>
-                )
-            }
+                                                <Row>
+                                                    <Col xs={1}></Col>
+                                                    <button type="submit">Submit</button>
+                                                    <Col xs={1}></Col>
+                                                    <Col xs={5}></Col>
+                                                </Row>
+                                            </Form>
+                                        </Modal.Body>
+                                    </Modal>
+                                </ButtonToolbar>
+                            </Col>
+
+                        </Row>
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    )
+}
+
+render() {
+    return (
+        <div>
+            {this.studentrenderform()}
+        </div>
+    )
+}
         }
