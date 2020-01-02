@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import Axios from 'axios';
 
 export default class Leave extends React.Component {
@@ -15,10 +15,10 @@ export default class Leave extends React.Component {
     }
 
     getData = (emp) => {
-        Axios.get('http://localhost:3001/leave').then((res) => {
+        Axios.get('http://localhost:9000/leave/get').then((res) => {
             console.log(res.data);
             this.setState({
-                data: res.data.data
+                data: res.data
             })
         })
     }
